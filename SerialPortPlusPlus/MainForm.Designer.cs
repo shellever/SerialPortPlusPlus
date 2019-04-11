@@ -49,6 +49,7 @@
             this.cbTimerInterval = new System.Windows.Forms.ComboBox();
             this.lblTimerUnit = new System.Windows.Forms.Label();
             this.cbTimer = new System.Windows.Forms.CheckBox();
+            this.cbSendNewline = new System.Windows.Forms.CheckBox();
             this.cbHexSend = new System.Windows.Forms.CheckBox();
             this.btnClearSendText = new System.Windows.Forms.Button();
             this.btnSendText = new System.Windows.Forms.Button();
@@ -57,14 +58,14 @@
             this.tbReceiveText = new System.Windows.Forms.RichTextBox();
             this.btnClearReceiveText = new System.Windows.Forms.Button();
             this.cbHexReceive = new System.Windows.Forms.CheckBox();
-            this.ssSerialPortStatus = new System.Windows.Forms.StatusStrip();
-            this.slblSerialPortStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.cbSendNewline = new System.Windows.Forms.CheckBox();
             this.cbReceiveNewline = new System.Windows.Forms.CheckBox();
+            this.ssSerialPortStatusWrap = new System.Windows.Forms.StatusStrip();
+            this.slblSerialPort = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sslblSerialPortStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.gbGeneral.SuspendLayout();
             this.gbSend.SuspendLayout();
             this.gbReceive.SuspendLayout();
-            this.ssSerialPortStatus.SuspendLayout();
+            this.ssSerialPortStatusWrap.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbGeneral
@@ -266,6 +267,16 @@
             this.cbTimer.UseVisualStyleBackColor = true;
             this.cbTimer.CheckedChanged += new System.EventHandler(this.cbTimer_CheckedChanged);
             // 
+            // cbSendNewline
+            // 
+            this.cbSendNewline.AutoSize = true;
+            this.cbSendNewline.Location = new System.Drawing.Point(151, 21);
+            this.cbSendNewline.Name = "cbSendNewline";
+            this.cbSendNewline.Size = new System.Drawing.Size(64, 17);
+            this.cbSendNewline.TabIndex = 3;
+            this.cbSendNewline.Text = "Newline";
+            this.cbSendNewline.UseVisualStyleBackColor = true;
+            // 
             // cbHexSend
             // 
             this.cbHexSend.AutoSize = true;
@@ -345,32 +356,6 @@
             this.cbHexReceive.Text = "Hex";
             this.cbHexReceive.UseVisualStyleBackColor = true;
             // 
-            // ssSerialPortStatus
-            // 
-            this.ssSerialPortStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.slblSerialPortStatus});
-            this.ssSerialPortStatus.Location = new System.Drawing.Point(0, 489);
-            this.ssSerialPortStatus.Name = "ssSerialPortStatus";
-            this.ssSerialPortStatus.Size = new System.Drawing.Size(609, 22);
-            this.ssSerialPortStatus.TabIndex = 3;
-            this.ssSerialPortStatus.Text = "SerialPortStatus";
-            // 
-            // slblSerialPortStatus
-            // 
-            this.slblSerialPortStatus.Name = "slblSerialPortStatus";
-            this.slblSerialPortStatus.Size = new System.Drawing.Size(39, 17);
-            this.slblSerialPortStatus.Text = "Ready";
-            // 
-            // cbSendNewline
-            // 
-            this.cbSendNewline.AutoSize = true;
-            this.cbSendNewline.Location = new System.Drawing.Point(151, 21);
-            this.cbSendNewline.Name = "cbSendNewline";
-            this.cbSendNewline.Size = new System.Drawing.Size(64, 17);
-            this.cbSendNewline.TabIndex = 3;
-            this.cbSendNewline.Text = "Newline";
-            this.cbSendNewline.UseVisualStyleBackColor = true;
-            // 
             // cbReceiveNewline
             // 
             this.cbReceiveNewline.AutoSize = true;
@@ -381,12 +366,35 @@
             this.cbReceiveNewline.Text = "Newline";
             this.cbReceiveNewline.UseVisualStyleBackColor = true;
             // 
+            // ssSerialPortStatusWrap
+            // 
+            this.ssSerialPortStatusWrap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.slblSerialPort,
+            this.sslblSerialPortStatus});
+            this.ssSerialPortStatusWrap.Location = new System.Drawing.Point(0, 489);
+            this.ssSerialPortStatusWrap.Name = "ssSerialPortStatusWrap";
+            this.ssSerialPortStatusWrap.Size = new System.Drawing.Size(609, 22);
+            this.ssSerialPortStatusWrap.TabIndex = 3;
+            this.ssSerialPortStatusWrap.Text = "SerialPortStatus";
+            // 
+            // slblSerialPort
+            // 
+            this.slblSerialPort.Name = "slblSerialPort";
+            this.slblSerialPort.Size = new System.Drawing.Size(39, 17);
+            this.slblSerialPort.Text = "Ready";
+            // 
+            // sslblSerialPortStatus
+            // 
+            this.sslblSerialPortStatus.Name = "sslblSerialPortStatus";
+            this.sslblSerialPortStatus.Size = new System.Drawing.Size(84, 17);
+            this.sslblSerialPortStatus.Text = "No Connected";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 511);
-            this.Controls.Add(this.ssSerialPortStatus);
+            this.Controls.Add(this.ssSerialPortStatusWrap);
             this.Controls.Add(this.gbReceive);
             this.Controls.Add(this.gbSend);
             this.Controls.Add(this.gbGeneral);
@@ -401,8 +409,8 @@
             this.gbSend.PerformLayout();
             this.gbReceive.ResumeLayout(false);
             this.gbReceive.PerformLayout();
-            this.ssSerialPortStatus.ResumeLayout(false);
-            this.ssSerialPortStatus.PerformLayout();
+            this.ssSerialPortStatusWrap.ResumeLayout(false);
+            this.ssSerialPortStatusWrap.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,8 +440,8 @@
         private System.Windows.Forms.Button btnClearSendText;
         private System.Windows.Forms.GroupBox gbReceive;
         private System.Windows.Forms.RichTextBox tbReceiveText;
-        private System.Windows.Forms.StatusStrip ssSerialPortStatus;
-        private System.Windows.Forms.ToolStripStatusLabel slblSerialPortStatus;
+        private System.Windows.Forms.StatusStrip ssSerialPortStatusWrap;
+        private System.Windows.Forms.ToolStripStatusLabel slblSerialPort;
         private System.Windows.Forms.CheckBox cbHexSend;
         private System.Windows.Forms.Label lblTimerUnit;
         private System.Windows.Forms.CheckBox cbTimer;
@@ -442,6 +450,7 @@
         private System.Windows.Forms.ComboBox cbTimerInterval;
         private System.Windows.Forms.CheckBox cbSendNewline;
         private System.Windows.Forms.CheckBox cbReceiveNewline;
+        private System.Windows.Forms.ToolStripStatusLabel sslblSerialPortStatus;
     }
 }
 

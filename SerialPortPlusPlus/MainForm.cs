@@ -94,6 +94,7 @@ namespace SerialPortPlusPlus
 
 
             btnSendText.Enabled = false;
+            sslblSerialPortStatus.Text = "";
 
             //tbReceiveText.Font = new Font("Courier New", 8, FontStyle.Bold);
             tbReceiveText.Font = new Font(FontFamily.GenericMonospace, 8, FontStyle.Bold);
@@ -249,6 +250,9 @@ namespace SerialPortPlusPlus
                     ConfigureSerialPort();
                     mSerialPort.Open();
                     btnOpen.Text = "Close";
+                    slblSerialPort.Text = mSerialPort.PortName;
+                    sslblSerialPortStatus.Text = "Opened";
+                    sslblSerialPortStatus.ForeColor = Color.Green;
                     btnSendText.Enabled = true;
 
                     if (cbTimer.Checked)
@@ -273,6 +277,9 @@ namespace SerialPortPlusPlus
                 {
                     mSerialPort.Close();
                     btnOpen.Text = "Open";
+                    slblSerialPort.Text = mSerialPort.PortName;
+                    sslblSerialPortStatus.Text = "Closed";
+                    sslblSerialPortStatus.ForeColor = Color.Red;
                     btnSendText.Enabled = false;
 
                     if (cbTimer.Checked)
