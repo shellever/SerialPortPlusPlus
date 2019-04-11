@@ -342,7 +342,7 @@ namespace SerialPortPlusPlus
             }
 
             string sendStr = tbSendingText.Text.ToString();
-            sendStr.Trim();     // remove all leading and trailing whitespace
+            sendStr = sendStr.Trim();     // remove all leading and trailing whitespace
             if (String.IsNullOrEmpty(sendStr))
             {
                 return;
@@ -358,13 +358,10 @@ namespace SerialPortPlusPlus
             }
             else
             {
-                //string[] sendStrArray = sendStr.Split(' ');
-                string[] sendStrArray = Regex.Split(sendStr, @"[\s,]+");
-                byte[] sendBytes = new byte[sendStrArray.Length];
-                for (int i = 0; i < sendStrArray.Length; i++)
-                {
-                    sendBytes[i] = Convert.ToByte(sendStrArray[i], 16);     // "FE" -> 0xFE
-                }
+                sendStr = sendStr.ToUpper();
+                sendStr = sendStr.Replace("0X", "");
+                sendStr = Regex.Replace(sendStr, @"[^0-9A-F]", "");
+                byte[] sendBytes = hexStringToBytes(sendStr);
 
                 mSerialPort.Write(sendBytes, 0, sendBytes.Length);
             }
