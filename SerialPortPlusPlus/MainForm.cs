@@ -97,7 +97,7 @@ namespace SerialPortPlusPlus
             btnSendText.Enabled = false;
             sslblSerialPortStatus.Text = "";
 
-            tbSendingText.Text = "hello world";
+            tbSendingText.Text = "type string sending here";
             tbSendingText.ForeColor = Color.Gray;
 
             //tbReceiveText.Font = new Font("Courier New", 8, FontStyle.Bold);
@@ -475,7 +475,7 @@ namespace SerialPortPlusPlus
             }
             else
             {
-                tbSendingText.Text = "hello world";
+                tbSendingText.Text = "type string sending here";
                 tbSendingText.ForeColor = Color.Gray;
                 hasSendingText = false;
             }
@@ -483,13 +483,18 @@ namespace SerialPortPlusPlus
 
         private void cbHexSend_CheckedChanged(object sender, EventArgs e)
         {
+            if (hasSendingText)
+            {
+                return;
+            }
+
             if (cbHexSend.Checked)
             {
-                tbSendingText.Text = "AA55FE | AA 55 FE";
+                tbSendingText.Text = "0xAA,0x55,0xFE | AA 55 FE | AA55FE";
             }
             else
             {
-                tbSendingText.Text = "hello world";
+                tbSendingText.Text = "type string sending here";
             }
         }
     }
