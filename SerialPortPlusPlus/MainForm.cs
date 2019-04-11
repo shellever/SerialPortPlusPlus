@@ -20,6 +20,7 @@ namespace SerialPortPlusPlus
         private SerialPort mSerialPort;
         private System.Timers.Timer mTimer;
         private bool isSupportInteractiveTerminal = FLAG_INTERACTIVE_TERMINAL_SUPPORT;
+        private bool hasSendingText = false;
 
         private delegate void SetReceiveTextCallback(String text);
         private delegate void TimerTimeOutCallback();
@@ -95,6 +96,9 @@ namespace SerialPortPlusPlus
 
             btnSendText.Enabled = false;
             sslblSerialPortStatus.Text = "";
+
+            tbSendingText.Text = "hello world";
+            tbSendingText.ForeColor = Color.Gray;
 
             //tbReceiveText.Font = new Font("Courier New", 8, FontStyle.Bold);
             tbReceiveText.Font = new Font(FontFamily.GenericMonospace, 8, FontStyle.Bold);
@@ -449,6 +453,41 @@ namespace SerialPortPlusPlus
             {
                 mSerialPort.Close();
                 mSerialPort = null;
+            }
+        }
+
+        private void tbSendingText_Enter(object sender, EventArgs e)
+        {
+            if (!hasSendingText)
+            {
+                tbSendingText.Clear();
+            }
+            tbSendingText.ForeColor = Color.Black;
+        }
+
+        private void tbSendingText_Leave(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(tbSendingText.Text))
+            {
+                hasSendingText = true;
+            }
+            else
+            {
+                tbSendingText.Text = "hello world";
+                tbSendingText.ForeColor = Color.Gray;
+                hasSendingText = false;
+            }
+        }
+
+        private void cbHexSend_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbHexSend.Checked)
+            {
+                tbSendingText.Text = "AA55FE | AA 55 FE";
+            }
+            else
+            {
+                tbSendingText.Text = "hello world";
             }
         }
     }

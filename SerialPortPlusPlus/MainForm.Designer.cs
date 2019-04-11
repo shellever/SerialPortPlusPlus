@@ -286,6 +286,7 @@
             this.cbHexSend.TabIndex = 2;
             this.cbHexSend.Text = "Hex";
             this.cbHexSend.UseVisualStyleBackColor = true;
+            this.cbHexSend.CheckedChanged += new System.EventHandler(this.cbHexSend_CheckedChanged);
             // 
             // btnClearSendText
             // 
@@ -313,6 +314,8 @@
             this.tbSendingText.Name = "tbSendingText";
             this.tbSendingText.Size = new System.Drawing.Size(444, 20);
             this.tbSendingText.TabIndex = 0;
+            this.tbSendingText.Enter += new System.EventHandler(this.tbSendingText_Enter);
+            this.tbSendingText.Leave += new System.EventHandler(this.tbSendingText_Leave);
             // 
             // gbReceive
             // 
