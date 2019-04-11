@@ -342,6 +342,12 @@ namespace SerialPortPlusPlus
             }
 
             string sendStr = tbSendingText.Text.ToString();
+            sendStr.Trim();     // remove all leading and trailing whitespace
+            if (String.IsNullOrEmpty(sendStr))
+            {
+                return;
+            }
+
             if (!cbHexSend.Checked)
             {
                 if (cbSendNewline.Checked)
@@ -352,7 +358,6 @@ namespace SerialPortPlusPlus
             }
             else
             {
-                sendStr.TrimEnd();
                 //string[] sendStrArray = sendStr.Split(' ');
                 string[] sendStrArray = Regex.Split(sendStr, @"[\s,]+");
                 byte[] sendBytes = new byte[sendStrArray.Length];
