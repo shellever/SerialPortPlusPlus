@@ -475,7 +475,14 @@ namespace SerialPortPlusPlus
             }
             else
             {
-                tbSendingText.Text = "type string sending here";
+                if (cbHexSend.Checked)
+                {
+                    tbSendingText.Text = "0xAA,0x55,0xFE | AA 55 FE | AA55FE";
+                }
+                else
+                {
+                    tbSendingText.Text = "type string sending here";
+                }
                 tbSendingText.ForeColor = Color.Gray;
                 hasSendingText = false;
             }
