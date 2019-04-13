@@ -99,6 +99,7 @@ namespace SerialPortPlusPlus
 
             tbSendingText.Text = "type string sending here";
             tbSendingText.ForeColor = Color.Gray;
+            tbSendingText.Font = new Font(FontFamily.GenericMonospace, 8, FontStyle.Bold);
 
             //tbReceiveText.Font = new Font("Courier New", 8, FontStyle.Bold);
             tbReceiveText.Font = new Font(FontFamily.GenericMonospace, 8, FontStyle.Bold);
