@@ -212,6 +212,7 @@
             this.cbPortName.Name = "cbPortName";
             this.cbPortName.Size = new System.Drawing.Size(121, 21);
             this.cbPortName.TabIndex = 1;
+            this.cbPortName.DropDown += new System.EventHandler(this.cbPortName_DropDown);
             // 
             // label1
             // 

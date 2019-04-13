@@ -505,5 +505,23 @@ namespace SerialPortPlusPlus
                 tbSendingText.Text = "type string sending here";
             }
         }
+
+        private void cbPortName_DropDown(object sender, EventArgs e)
+        {
+            string[] portNames = SerialPort.GetPortNames();
+            if (portNames == null || portNames.Length == 0)
+            {
+                Console.Write("[Error] InitSerialPortControls: no found available port!");
+            }
+            else
+            {
+                cbPortName.Items.Clear();
+                Array.Sort(portNames);                  // sort ports
+                foreach (string portname in portNames)
+                {
+                    cbPortName.Items.Add(portname);
+                }
+            }
+        }
     }
 }
