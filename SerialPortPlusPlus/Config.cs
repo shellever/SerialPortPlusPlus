@@ -57,11 +57,10 @@ namespace SerialPortPlusPlus
 
         public static void LoadConfig(string filePath)
         {
-            FilePath = filePath;
             // use default filename when filePath is null
-            if (String.IsNullOrEmpty(filePath))
+            if (!String.IsNullOrEmpty(filePath))
             {
-                FilePath = AppDomain.CurrentDomain.BaseDirectory + DEFAULT_FILE_NAME;
+                FilePath = filePath;
             }
 
             GetSerialPortConfig();
