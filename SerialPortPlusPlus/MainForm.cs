@@ -39,6 +39,8 @@ namespace SerialPortPlusPlus
         {
             mSerialPort = new SerialPort();
 
+            Config.LoadConfig(null);        // load serial port config from ini file
+
             InitSerialPortControls();
             InitSerialPortComponents();
 
@@ -61,7 +63,7 @@ namespace SerialPortPlusPlus
                 {
                     cbPortName.Items.Add(portname);
                 }
-                cbPortName.SelectedIndex = 0;           // COMX
+                cbPortName.SelectedIndex = GetIndexFromConfig(portNames, Config.PortName, 0);       // COMX
             }
 
             string[] baudRates = {
@@ -71,26 +73,26 @@ namespace SerialPortPlusPlus
                     "115200", "128000", "256000", "230400",
             };
             cbBaudRate.Items.AddRange(baudRates);
-            cbBaudRate.SelectedIndex = 12;          // 115200
+            cbBaudRate.SelectedIndex = GetIndexFromConfig(baudRates, Config.BaudRate, 12);          // 115200
 
             string[] dataBits = { "5", "6", "7", "8" };
             cbDataBits.Items.AddRange(dataBits);
-            cbDataBits.SelectedIndex = 3;           // 8
+            cbDataBits.SelectedIndex = GetIndexFromConfig(dataBits, Config.DataBits, 3);            // 8
             cbDataBits.DropDownStyle = ComboBoxStyle.DropDownList;  // only allow select, no edit
 
             string[] stopBits = { "1", "1.5", "2" };
             cbStopBits.Items.AddRange(stopBits);
-            cbStopBits.SelectedIndex = 0;           // 1
+            cbStopBits.SelectedIndex = GetIndexFromConfig(stopBits, Config.StopBits, 0);            // 1
             cbStopBits.DropDownStyle = ComboBoxStyle.DropDownList;
 
             string[] parities = { "None", "Odd", "Even", "Mark", "Space" };
             cbParity.Items.AddRange(parities);
-            cbParity.SelectedIndex = 0;             // None
+            cbParity.SelectedIndex = GetIndexFromConfig(parities, Config.Parity, 0);                // None
             cbParity.DropDownStyle = ComboBoxStyle.DropDownList;
 
             string[] flowControls = { "None", "RTS/CTS", "XON/XOFF" };
             cbFlowControl.Items.AddRange(flowControls);
-            cbFlowControl.SelectedIndex = 0;        // None
+            cbFlowControl.SelectedIndex = GetIndexFromConfig(flowControls, Config.FlowControl, 0);  // None
             cbFlowControl.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
@@ -107,6 +109,21 @@ namespace SerialPortPlusPlus
             string[] intervals = { "100", "200", "500", "1000", "2000", "50000" };
             cbTimerInterval.Items.AddRange(intervals);
             cbTimerInterval.SelectedIndex = 3;      // 1000 ms
+        }
+
+        private int GetIndexFromConfig(string[] list, string confValue, int defIndex)
+        {
+            int retIndex = defIndex;
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (String.Compare(list[i], confValue) == 0)
+                {
+                    retIndex = i;
+                    break;
+                }
+            }
+
+            return retIndex;
         }
 
         private void InitSerialPortComponents()
@@ -450,6 +467,17 @@ namespace SerialPortPlusPlus
             }
         }
 
+        private void SaveConfig()
+        {
+            Config.PortName = (string)(cbPortName.SelectedItem);
+            Config.BaudRate = (string)(cbBaudRate.SelectedItem);
+            Config.DataBits = (string)(cbDataBits.SelectedItem);
+            Config.StopBits = (string)(cbStopBits.SelectedItem);
+            Config.Parity = (string)(cbParity.SelectedItem);
+
+            Config.SaveConfig();
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (mSerialPort != null || mSerialPort.IsOpen)
@@ -457,6 +485,8 @@ namespace SerialPortPlusPlus
                 mSerialPort.Close();
                 mSerialPort = null;
             }
+
+            SaveConfig();
         }
 
         private void tbSendingText_Enter(object sender, EventArgs e)
@@ -522,6 +552,11 @@ namespace SerialPortPlusPlus
                     cbPortName.Items.Add(portname);
                 }
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveConfig();
         }
     }
 }
