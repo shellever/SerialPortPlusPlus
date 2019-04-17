@@ -58,7 +58,9 @@ namespace SerialPortPlusPlus
             }
             else
             {
-                Array.Sort(portNames);                  // sort ports
+                //Array.Sort(portNames);                  // COM1 COM10 COM11 COM3 COM7 COM8
+                // COM1 COM3 COM7 COM8 COM10 COM11 
+                portNames = portNames.OrderBy(s => int.Parse(Regex.Match(s, @"\d+").Value)).ToArray();
                 foreach (string portname in portNames)
                 {
                     cbPortName.Items.Add(portname);
@@ -546,7 +548,9 @@ namespace SerialPortPlusPlus
             else
             {
                 cbPortName.Items.Clear();
-                Array.Sort(portNames);                  // sort ports
+                //Array.Sort(portNames);                  // COM1 COM10 COM11 COM3 COM7 COM8
+                // COM1 COM3 COM7 COM8 COM10 COM11 
+                portNames = portNames.OrderBy(s => int.Parse(Regex.Match(s, @"\d+").Value)).ToArray();
                 foreach (string portname in portNames)
                 {
                     cbPortName.Items.Add(portname);
